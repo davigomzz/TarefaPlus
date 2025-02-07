@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -22,3 +23,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+=======
+# TarefaPlus
+Um desafio para a empresa Agenda Edu sobre uma To-Do List para alunos acompanharem suas atividades.
+>>>>>>> main
