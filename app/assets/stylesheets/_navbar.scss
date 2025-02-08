@@ -1,0 +1,24 @@
+.navbar {
+    background-color: #9370DB !important;
+  }
+  
+  .navbar .navbar-brand {
+    font-weight: bold;
+    color: white !important;
+  }
+  
+  .navbar .user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .navbar .logout-link {
+    color: white !important;
+    text-decoration: none;
+  }
+  
+  .navbar .logout-link:hover {
+    text-decoration: underline;
+  }
+  

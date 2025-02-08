@@ -1,41 +1,31 @@
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="#">TarefaPlus</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TarefaPlus</title>
+</head>
+<body class="bg-light">
+    <%= render 'layouts/navbar' %>
+    <div class="container mt-5">
+        <h2 class="text-center my-4">Suas Tarefas Escolares</h2>
+        <% @tasks.each do |task| %>
+            <% border_color = case task.status
+                when "para_fazer" then "border-danger"
+                when "fazendo" then "border-warning"
+                when "feito" then "border-success"
+            end %>
+            <div class="task-card bg-white <%= border_color %>">
+                <h5 class="<%= 'task-done' if task.status == 'feito' %>"><%= task.title %></h5>
+                <p class="mb-1 <%= 'task-done' if task.status == 'feito' %>"><%= task.description %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted"><i class="bi bi-calendar"></i> <%= task.due_date.strftime('%d/%m/%Y') %></small>
+                    <div>
+                        <%= link_to "Editar", edit_task_path(task), class: "btn btn-sm btn-warning" %>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
-<h1>Minhas Tarefas</h1>
-
-
-<%= link_to "Nova Tarefa", new_task_path, class: "btn btn-primary" %>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Título</th>
-      <th>Descrição</th>
-      <th>Prazo</th>
-      <th>Status</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.title %></td>
-        <td><%= task.description %></td>
-        <td><%= task.due_date %></td>
-        <td><%= task.status.humanize %></td>
-        <td>
-          <%= link_to "Editar", edit_task_path(task), class: "btn btn-warning" %>
-          <%= link_to "Excluir", task, method: :delete, class: "btn btn-danger", data: { confirm: "Tem certeza?" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-
-</table>
+        <% end %>
+    </div>
+</body>
+</html>
