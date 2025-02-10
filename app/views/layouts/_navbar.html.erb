@@ -1,11 +1,11 @@
 <nav class="navbar navbar-light">
   <div class="container d-flex justify-content-between">
-    <a class="navbar-brand text-white fw-bold" href="#">TarefaPlus</a>
+    <a class="navbar-brand " href="#">TarefaPlus</a>
     
     <% if user_signed_in? %>
       <div class="user-info d-flex align-items-center gap-2">
-        <span class="text-white fw-normal"><%= current_user.name.split(" ").first %></span>
-        <span class="text-white">|</span>
+        <span><%= current_user.name.split(" ").first %></span>
+        <span>|</span>
         <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "btn btn-sm btn-outline-light" %>
       </div>
     <% end %>

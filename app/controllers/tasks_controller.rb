@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   
     def index
       @tasks = current_user.tasks.order(:due_date)
+      @tasks_grouped = @tasks.group_by(&:status)
     end
   
     def new
@@ -12,12 +13,6 @@ class TasksController < ApplicationController
     end
   
     def create
-      @task = current_user.tasks.build(task_params)
-      if @task.save
-        redirect_to tasks_path, notice: 'Tarefa criada com sucesso!'
-      else
-        render :new
-      end
     end
   
     def edit

@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TarefaPlus</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TarefaPlus</title>
 </head>
 <body class="bg-light">
-    <%= render 'layouts/navbar' %>
-    <div class="container mt-5">
-        <h2 class="text-center my-4">Suas Tarefas Escolares</h2>
-        <% @tasks.each do |task| %>
-            <% border_color = case task.status
-                when "para_fazer" then "border-danger"
-                when "fazendo" then "border-warning"
-                when "feito" then "border-success"
-            end %>
-            <div class="task-card bg-white <%= border_color %>">
-                <h5 class="<%= 'task-done' if task.status == 'feito' %>"><%= task.title %></h5>
-                <p class="mb-1 <%= 'task-done' if task.status == 'feito' %>"><%= task.description %></p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted"><i class="bi bi-calendar"></i> <%= task.due_date.strftime('%d/%m/%Y') %></small>
-                    <div>
-                        <%= link_to "Editar", edit_task_path(task), class: "btn btn-sm btn-warning" %>
-                    </div>
-                </div>
-            </div>
+  <%= render 'layouts/navbar' %>
+
+  <div class="container mt-5">
+    <h2 class="text-center my-4">Painel de Acompanhamento de Tarefas</h2>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <h3 class="mb-3">A Fazer</h3>
+        <% @tasks.where(status: 'para_fazer').each do |task| %>
+          <%= render partial: 'task_card', locals: { task: task } %>
         <% end %>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="mb-3">Fazendo</h3>
+        <% @tasks.where(status: 'fazendo').each do |task| %>
+          <%= render partial: 'task_card', locals: { task: task } %>
+        <% end %>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="mb-3">Feitas</h3>
+        <% @tasks.where(status: 'feito').each do |task| %>
+          <%= render partial: 'task_card', locals: { task: task } %>
+        <% end %>
+      </div>
     </div>
+  </div>
+  
 </body>
 </html>
