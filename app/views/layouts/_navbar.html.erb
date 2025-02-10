@@ -4,7 +4,7 @@
     
     <% if user_signed_in? %>
       <div class="user-info d-flex align-items-center gap-2">
-        <span><%= current_user.name.split(" ").first %></span>
+          <span><%= current_user.name.present? ? current_user.name.split(" ").first : "Usuário" %></span>
         <span>|</span>
         <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "btn btn-sm btn-outline-light" %>
       </div>

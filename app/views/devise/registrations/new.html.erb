@@ -36,6 +36,11 @@
                     <%= f.password_field :password_confirmation, class: "form-control", autocomplete: "new-password" %>
                 </div>
 
+                <div class="field">
+                    <%= f.label :role, "Você é aluno ou professor ?" %>
+                    <%= f.select :role, [['Aluno', 'student'], ['Professor', 'teacher']], required: true %>
+                </div>
+
                 <div class="d-grid">
                     <%= f.submit "Cadastrar", class: "btn btn-primary" %>
                 </div>
