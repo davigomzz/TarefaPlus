@@ -4,9 +4,9 @@
     
     <% if user_signed_in? %>
       <div class="user-info d-flex align-items-center gap-2">
-        <span class="text-white fw-bold"><%= current_user.name %></span>
+        <span class="text-white fw-normal"><%= current_user.name.split(" ").first %></span>
         <span class="text-white">|</span>
-        <%= link_to "Sair", destroy_user_session_path, method: :delete, class: "btn btn-sm btn-outline-light" %>
+        <%= button_to "Sair", destroy_user_session_path, method: :delete, class: "btn btn-sm btn-outline-light" %>
       </div>
     <% end %>
   </div>
