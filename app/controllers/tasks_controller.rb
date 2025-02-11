@@ -4,12 +4,18 @@ class TasksController < ApplicationController
 
   def index
     if current_user.role == 'student'
-      @tasks = Task.where(classroom_id: current_user.classroom_id).order(:due_date)
+      if current_user.classroom_id.present?
+        @tasks = Task.where(classroom_id: current_user.classroom_id).order(:due_date)
+      else
+        @tasks = Task.none
+        flash.now[:alert] = "Você não está associado a nenhuma série. Por favor, contate o administrador."
+      end
     else
-      @tasks = current_user.tasks.order(:due_date)
+      @tasks = Task.where(teacher_id: current_user.id).order(:due_date)
     end
     @tasks_grouped = @tasks.group_by(&:status)
   end
+  
 
   def new
     if current_user.role == 'teacher'

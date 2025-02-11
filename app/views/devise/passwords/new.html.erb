@@ -1,16 +1,40 @@
-<h2>Forgot your password?</h2>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TarefaPlus | Redefinir Senha</title>
+  </head>
+  <body>
+    <%= render 'layouts/navbar' %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+      <div class="card p-4" style="width: 400px;">
+        <h2 class="mb-4 text-center" style="color: #6a1b9a;">Redefinir Senha</h2>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+          <div class="mb-3">
+            <%= f.label :email, "Email", class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Digite seu email" %>
+          </div>
 
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
+          <div class="d-grid">
+            <%= f.submit "Enviar instruções", class: "btn btn-primary" %>
+          </div>
+        <% end %>
 
-<%= render "devise/shared/links" %>
+        <hr>
+
+        <div class="text-center">
+          <p>
+            <%= link_to "Cadastre-se aqui", new_registration_path(resource_name), style: "color: #6a1b9a; text-decoration: none;" %>
+          </p>
+          <p>
+            <%= link_to "Já tem uma conta? Entrar", new_session_path(resource_name), class: "text-decoration-none", style: "color: #6a1b9a;" %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

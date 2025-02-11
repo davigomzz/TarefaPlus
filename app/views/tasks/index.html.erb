@@ -11,6 +11,12 @@
   <div class="container mt-5">
     <h2 class="text-center my-4">Painel de Acompanhamento de Tarefas</h2>
     
+    <% if current_user.role == 'teacher' %>
+      <div class="text-center mb-4">
+        <%= link_to "Criar Tarefa", new_task_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
     <div class="row">
       <div class="col-md-4">
         <h3 class="mb-3">A Fazer</h3>
@@ -34,6 +40,5 @@
       </div>
     </div>
   </div>
-  
 </body>
 </html>
