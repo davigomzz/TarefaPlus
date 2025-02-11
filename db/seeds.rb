@@ -24,4 +24,8 @@ User.find_each do |user|
   user.tasks.create!(TASKS_DATA)
 end
 
-puts "Tabelas Do Ambiente De Desenvolvimento Populadas !!"
+  Classroom.find_or_create_by(name: '1º Ano do Ensino Médio')
+  Classroom.find_or_create_by(name: '2º Ano do Ensino Médio')
+  Classroom.find_or_create_by(name: '3º Ano do Ensino Médio')
+
+  puts "Tabelas Do Ambiente De Desenvolvimento Populadas !!"

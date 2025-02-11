@@ -1,41 +1,27 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :check_student, only: [:create]
 
   def index
-    if current_user.role == 'student'
-      if current_user.classroom_id.present?
-        @tasks = Task.where(classroom_id: current_user.classroom_id).order(:due_date)
-      else
-        @tasks = Task.none
-        flash.now[:alert] = "Você não está associado a nenhuma série. Por favor, contate o administrador."
-      end
-    else
-      @tasks = Task.where(teacher_id: current_user.id).order(:due_date)
-    end
+    @tasks = current_user.tasks.order(:due_date)
     @tasks_grouped = @tasks.group_by(&:status)
   end
   
 
   def new
-    if current_user.role == 'teacher'
-      @task = Task.new
-    else
-      redirect_to tasks_path, alert: 'Você não tem permissão para criar tarefas.'
-    end
+    @task = Task.new
   end
 
+  
+  #a criação é permitida somente para o professor
   def create
-    if current_user.role == 'teacher'
       @task = current_user.tasks.build(task_params)
       if @task.save
         redirect_to tasks_path, notice: 'Tarefa criada com sucesso!'
       else
         render :new
       end
-    else
-      redirect_to tasks_path, alert: 'Você não tem permissão para criar tarefas.'
-    end
   end
 
   def edit
@@ -53,28 +39,10 @@ class TasksController < ApplicationController
   end
 
   def update
-    if current_user.role == 'student'
-      if @task.classroom_id == current_user.classroom_id
-        if @task.update(task_params_student)
-          redirect_to tasks_path, notice: 'Status da tarefa atualizado com sucesso!'
-        else
-          render :edit
-        end
-      else
-        redirect_to tasks_path, alert: 'Você não pode editar esta tarefa.'
-      end
-    elsif current_user.role == 'teacher'
-      if @task.teacher_id == current_user.id
-        if @task.update(task_params_teacher)
-          redirect_to tasks_path, notice: 'Tarefa atualizada com sucesso!'
-        else
-          render :edit
-        end
-      else
-        redirect_to tasks_path, alert: 'Você não tem permissão para editar esta tarefa.'
-      end
+    if @task.update(task_params)
+      redirect_to tasks_path, notice: 'Tarefa atualizada com sucesso!'
     else
-      redirect_to tasks_path, alert: 'Acesso negado.'
+      render :edit
     end
   end
 
@@ -89,15 +57,17 @@ class TasksController < ApplicationController
 
   private
 
+  def check_student
+    if current_user.role == 'student'
+      redirect_to root_path, alert: 'Apenas professores podem criar tarefas.'
+    end
+  end
+
   def set_task
     @task = Task.find(params[:id])
   end
 
-  def task_params_teacher
+  def task_params
     params.require(:task).permit(:title, :description, :due_date, :status, :classroom_id)
-  end
-
-  def task_params_student
-    params.require(:task).permit(:status)
   end
 end

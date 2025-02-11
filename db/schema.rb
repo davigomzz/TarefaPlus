@@ -10,20 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_10_212622) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_11_182942) do
   create_table "classrooms", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "classrooms_teachers", force: :cascade do |t|
-    t.integer "classroom_id", null: false
-    t.integer "teacher_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["classroom_id"], name: "index_classrooms_teachers_on_classroom_id"
-    t.index ["teacher_id"], name: "index_classrooms_teachers_on_teacher_id"
+  create_table "task_students", force: :cascade do |t|
+    t.integer "status"
+    t.integer "student_id"
+    t.integer "task_id", null: false
+    t.index ["student_id"], name: "index_task_students_on_student_id"
+    t.index ["task_id"], name: "index_task_students_on_task_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -55,9 +54,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_10_212622) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "classrooms_teachers", "classrooms"
-  add_foreign_key "classrooms_teachers", "users", column: "teacher_id"
+  add_foreign_key "task_students", "tasks"
+  add_foreign_key "task_students", "tasks", column: "student_id"
   add_foreign_key "tasks", "classrooms"
+  add_foreign_key "tasks", "users", column: "teacher_id"
   add_foreign_key "tasks", "users", column: "teacher_id"
   add_foreign_key "users", "classrooms"
 end

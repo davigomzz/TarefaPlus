@@ -1,0 +1,3 @@
+class TaskStudent < ApplicationRecord
+  
+end
