@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TarefaPlus</title>
+  <%= stylesheet_link_tag "application", media: "all" %>
+</head>
+<body class="bg-light">
+  <%= render 'layouts/navbar' %>
+
+  <div class="container mt-5">
+    <h2 class="text-center my-4">Painel de Acompanhamento de Tarefas</h2>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <h3 class="mb-3">A Fazer</h3>
+        <% @tasks_students.select(&:para_fazer?).each do |task_student| %>
+          <%= render partial: 'task_card_students', locals: { task_student: task_student } %>
+        <% end %>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="mb-3">Fazendo</h3>
+        <% @tasks_students.select(&:fazendo?).each do |task_student| %>
+          <%= render partial: 'task_card_students', locals: { task_student: task_student } %>
+        <% end %>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="mb-3">Feitas</h3>
+        <% @tasks_students.select(&:feito?).each do |task_student| %>
+          <%= render partial: 'task_card_students', locals: { task_student: task_student } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -28,7 +28,7 @@
           </div>
           <div class="mb-3">
             <%= f.label :role, "Você é:", class: "form-label" %>
-            <%= f.select :role, options_for_select([["Aluno", "student"], ["Professor", "teacher"]]), {}, class: "form-select" %>
+            <%= f.select :role, options_for_select([["Aluno", "aluno"], ["Professor", "professor"]]), {}, class: "form-select" %>
           </div>
           <div class="d-grid">
             <%= f.submit "Cadastrar", class: "btn btn-primary" %>

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :tasks, except: :show
   resources :classrooms, only: [:index, :show]
   root "tasks#index"
+  resources :task_students
 end

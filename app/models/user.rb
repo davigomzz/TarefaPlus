@@ -4,7 +4,7 @@ class User < ApplicationRecord
          
 
   has_many :tasks, foreign_key: "teacher_id", dependent: :destroy
-  has_many :tasks_students, foreign_key: "student_id", dependent: :destroy
+  has_many :task_students, foreign_key: "student_id", dependent: :destroy
   belongs_to :classroom, optional: true
 
   validates :email, presence: true, uniqueness: true

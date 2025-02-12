@@ -1,0 +1,16 @@
+<div class="card mb-3 bg-<%= task_student.status_class %> bg-opacity-25 text-dark">
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= task_student.task.title %>
+    </h5>
+    <p class="card-text">
+      <%= task_student.task.description %>
+    </p>
+  </div>
+  <div class="card-footer d-flex justify-content-between align-items-center">
+    <small class="text-dark">
+      <i class="bi bi-calendar"></i> <%= task_student.task.due_date.strftime('%d/%m/%Y') %>
+    </small>
+    <%= link_to "Editar", edit_task_path(task_student.task), class: "btn btn-sm btn-warning" %>
+  </div>
+</div>
