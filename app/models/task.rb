@@ -1,8 +1,6 @@
 class Task < ApplicationRecord
   belongs_to :teacher, class_name: "User", foreign_key: "teacher_id"
   belongs_to :classroom, optional: true
-  
-  enum status: { para_fazer: 0, fazendo: 1, feito: 2 }
 
   def status_class
     case status
@@ -14,5 +12,4 @@ class Task < ApplicationRecord
   end
 
   validates :title, presence: true
-  validates :status, inclusion: { in: statuses.keys }
 end
