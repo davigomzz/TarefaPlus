@@ -30,24 +30,22 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_11_182942) do
     t.text "description"
     t.date "due_date"
     t.integer "status"
-    t.integer "teacher_id", null: false
+    t.integer "teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "classroom_id"
     t.index ["classroom_id"], name: "index_tasks_on_classroom_id"
-    t.index ["teacher_id"], name: "index_tasks_on_teacher_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "name"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.string "role"
     t.integer "classroom_id"
     t.index ["classroom_id"], name: "index_users_on_classroom_id"
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -55,7 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_11_182942) do
   end
 
   add_foreign_key "task_students", "tasks"
-  add_foreign_key "task_students", "tasks", column: "student_id"
+  add_foreign_key "task_students", "users", column: "student_id"
   add_foreign_key "tasks", "classrooms"
   add_foreign_key "tasks", "users", column: "teacher_id"
   add_foreign_key "tasks", "users", column: "teacher_id"

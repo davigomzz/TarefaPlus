@@ -7,6 +7,6 @@ class CreateTaskStudents < ActiveRecord::Migration[7.1]
       end
       add_index :task_students, :student_id
   
-      add_foreign_key :task_students, :tasks, column: :student_id
+      add_foreign_key :task_students, :users, column: :student_id
   end
 end
