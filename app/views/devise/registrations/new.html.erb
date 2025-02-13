@@ -30,6 +30,11 @@
             <%= f.label :role, "Você é:", class: "form-label" %>
             <%= f.select :role, options_for_select([["Aluno", "aluno"], ["Professor", "professor"]]), {}, class: "form-select" %>
           </div>
+          <div class="mb-3">
+            <%= f.label :classroom_id, "Série", class: "form-label" %>
+            <span style="color: red; font-size: smaller;">(Selecione somente se for aluno)</span>
+            <%= f.select :classroom_id, options_from_collection_for_select(Classroom.order(:name), :id, :name), { include_blank: "Selecione a Série" }, class: "form-select" %>
+          </div>
           <div class="d-grid">
             <%= f.submit "Cadastrar", class: "btn btn-primary" %>
           </div>

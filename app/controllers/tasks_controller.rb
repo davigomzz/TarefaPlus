@@ -5,12 +5,14 @@ class TasksController < ApplicationController
 
   def index
     if current_user.professor?
-      @tasks = Task.all.order(:due_date)
+      @tasks = Task.order(:due_date)
     else
-      taken_task_ids = current_user.task_students.pluck(:task_id)
-      @tasks = Task.where.not(id: taken_task_ids).order(:due_date)
+      @tasks = Task.for_classroom(current_user.classroom_id)
+                   .not_taken_by(current_user)
+                   .order(:due_date)
     end
   end
+  
   
   
 
@@ -31,19 +33,7 @@ class TasksController < ApplicationController
   end
   
 
-  def edit
-    if current_user.role == 'student'
-      unless @task.classroom_id == current_user.classroom_id
-        redirect_to tasks_path, alert: 'Você não pode editar esta tarefa.'
-      end
-    elsif current_user.role == 'teacher'
-      unless @task.teacher_id == current_user.id
-        redirect_to tasks_path, alert: 'Você não tem permissão para editar esta tarefa.'
-      end
-    else
-      redirect_to tasks_path, alert: 'Acesso negado.'
-    end
-  end
+
 
   def update
     if @task.update(task_params)

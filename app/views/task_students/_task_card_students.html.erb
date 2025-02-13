@@ -11,6 +11,6 @@
     <small class="text-dark">
       <i class="bi bi-calendar"></i> <%= task_student.task.due_date.strftime('%d/%m/%Y') %>
     </small>
-    <%= link_to "Editar", edit_task_path(task_student.task), class: "btn btn-sm btn-warning" %>
+<%= link_to "Editar", edit_task_student_path(task_student), class: "btn btn-sm", style: "background-color: #6a1b9a; border-color: #6a1b9a; color: #fff;" %>
   </div>
 </div>

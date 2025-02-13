@@ -4,31 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TarefaPlus</title>
-  <%= stylesheet_link_tag "application", media: "all" %>
 </head>
 <body class="bg-light">
   <%= render 'layouts/navbar' %>
-
+  
   <div class="container mt-5">
-    <h2 class="text-center my-4">Tarefas Totais </h2>
-    
-    <% if current_user.role == 'professor' %>
-      <div class="text-center mb-4">
-        <%= link_to "Criar Tarefa", new_task_path, class: "btn btn-primary" %>
+    <div class="kanban-board">
+      <div class="kanban-board-header">Tarefas Totais</div>
+      
+      <% if current_user.professor? %>
+        <div class="text-center mb-4">
+          <%= link_to "Criar Tarefa", new_task_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      
+      <div class="row">
+        <% @tasks.each do |task| %>
+          <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
+            <%= render partial: 'task_card', locals: { task: task } %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-
-    <div class="row">
-      <% @tasks.each do |task| %>
-        <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
-          <%= render partial: 'task_card', locals: { task: task } %>
+      
+      <% if current_user.aluno? %>
+        <div class="text-center">
+          <%= link_to "Listar Tarefas", task_students_path, class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
-    <% if current_user.role == 'aluno' %>
-      <%= link_to "Listar Tarefas", task_students_path, class: "btn btn-primary" %>
-    <% end %>
-
   </div>
 </body>
 </html>
