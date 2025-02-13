@@ -1,39 +1,32 @@
 class TasksController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: %i[edit update destroy]
   before_action :check_student, only: [:create]
 
   def index
-    if current_user.professor?
-      @tasks = Task.order(:due_date)
-    else
-      @tasks = Task.for_classroom(current_user.classroom_id)
+    @tasks = if current_user.professor?
+               Task.order(:due_date)
+             else
+               Task.for_classroom(current_user.classroom_id)
                    .not_taken_by(current_user)
                    .order(:due_date)
-    end
+             end
   end
-  
-  
-  
 
   def new
     @task = Task.new
   end
 
-  
-  #a criação é permitida somente para o professor
+  # a criação é permitida somente para o professor
   def create
     @task = current_user.tasks.build(task_params)
-    @task.status = 0 
+    @task.status = 0
     if @task.save
       redirect_to tasks_path, notice: 'Tarefa criada com sucesso!'
     else
       render :new
     end
   end
-  
-
-
 
   def update
     if @task.update(task_params)
@@ -55,9 +48,9 @@ class TasksController < ApplicationController
   private
 
   def check_student
-    if current_user.role == 'student'
-      redirect_to root_path, alert: 'Apenas professores podem criar tarefas.'
-    end
+    return unless current_user.role == 'student'
+
+    redirect_to root_path, alert: 'Apenas professores podem criar tarefas.'
   end
 
   def set_task
