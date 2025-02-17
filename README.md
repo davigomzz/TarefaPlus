@@ -23,10 +23,39 @@ O sistema utiliza o Devise para autenticação e conta com um layout intuitivo, 
 ## Como Executar a Aplicação
 
 ### Pré-requisitos
+- **Ruby 3.3.4** – Certifique-se de ter essa versão do Ruby instalada.
+- **Nodejs 18.17.1** - Certifique-se de ter essa versão do node instalada
+- **Rails 7.1.5** - Certifique-se de ter essa versão do Rails instalada
+- **Bundler** – Caso não tenha.
+### Passos para executar a aplicação
+1- Clone o repositório 
+  ```bash
+  git clone https://github.com/davigomzz/TarefaPlus.git
+  ```
+2- Entre na pasta do repositório clonado 
+  ```bash
+cd Tarefaplus
+  ```
+3- Instale as dependências 
+  ```bash
+bundle install
+  ```
+4-Configure o Banco de Dados 
+  ```bash
+rails db:create
+rails db:migrate
+rails db:seed
+  ```
+5- Inicie o servidor
+  ```bash
+rails server
+  ```
+6- Acesse a aplicação no seu navegador 
+  ```bash
+http://localhost:3000
+  ```
+  
 
-
-
-### Passos para Rodar
 
 
 
