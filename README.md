@@ -4,58 +4,55 @@
 ![GitHub issues](https://img.shields.io/github/issues/davigomzz/tarefaplus)
 ![GitHub language count](https://img.shields.io/github/languages/count/davigomzz/tarefaplus)
 
-## Sobre o Projeto
+## About the Project
 
-**TarefaPlus** é um sistema de gerenciamento de tarefas desenvolvido em Ruby on Rails, com o objetivo de facilitar a criação e o acompanhamento de atividades escolares. O sistema possui duas interfaces, adaptadas de acordo com o papel do usuário:
+**TarefaPlus** is a task management system built with Ruby on Rails, designed to make it easier to create and track school activities. The system has two interfaces, adapted according to the user’s role:
 
-- **Professor:** Pode criar tarefas e direcioná-las para turmas específicas, nesse caso somente para tumas do ensino médio.
-- **Aluno:** Pode visualizar as tarefas designadas à sua turma, "pegar" tarefas para seu mural pessoal e atualizar o status das tarefas (por exemplo: "Pendentes", "Em Andamento" e "Concluídas").
+- **Teacher:** Can create tasks and assign them to specific classes, in this case only for high school classes.
+- **Student:** Can view tasks assigned to their class, “take” tasks to their personal board, and update the status of tasks (for example: “To Do”, “In Progress”, and “Done”).
 
-O sistema utiliza o Devise para autenticação e conta com um layout intuitivo, que inclui uma visualização em formato kanban para os alunos.
+The system uses Devise for authentication and features an intuitive layout, including a kanban-style view for students.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-- **Ruby on Rails 7.1** – Framework web utilizado no desenvolvimento.
-- **SQLite3** – Banco de dados nativo do Ruby On Rails utilizado no ambiente de desenvolvimento.
-- **Bootstrap 5** – Framework CSS para o design responsivo e moderno.
-- **Devise** – Gem para autenticação de usuários.
+- **Ruby on Rails 7.1** – Web framework used in the development.
+- **SQLite3** – Native Ruby on Rails database used in the development environment.
+- **Bootstrap 5** – CSS framework for modern, responsive design.
+- **Devise** – Gem for user authentication.
 
-## Como Executar a Aplicação
+## How to Run the Application
 
-### Pré-requisitos
-- **Ruby 3.3.4** – Certifique-se de ter essa versão do Ruby instalada.
-- **Nodejs 18.17.1** - Certifique-se de ter essa versão do node instalada
-- **Rails 7.1.5** - Certifique-se de ter essa versão do Rails instalada
-- **Bundler** – Caso não tenha.
-### Passos para executar a aplicação
-1- Clone o repositório 
+### Prerequisites
+- **Ruby 3.3.4** – Make sure you have this Ruby version installed.
+- **Node.js 18.17.1** – Make sure you have this Node.js version installed.
+- **Rails 7.1.5** – Make sure you have this Rails version installed.
+- **Bundler** – In case you don’t have it installed.
+
+### Steps to run the application
+1- Clone the repository 
   ```bash
   git clone https://github.com/davigomzz/TarefaPlus.git
   ```
-2- Entre na pasta do repositório clonado 
+2- Go into the cloned repository folder 
   ```bash
 cd Tarefaplus
   ```
-3- Instale as dependências 
+3- Install the dependencies
   ```bash
 bundle install
   ```
-4-Configure o Banco de Dados 
+4- Set up the database
   ```bash
 rails db:create
 rails db:migrate
 rails db:seed
   ```
-5- Inicie o servidor
+5- Start the server
   ```bash
 rails server
   ```
-6- Acesse a aplicação no seu navegador 
+6- Access the application in your browser
   ```bash
 http://localhost:3000
   ```
   
-
-
-
-
