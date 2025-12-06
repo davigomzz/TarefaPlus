@@ -11,6 +11,9 @@ class User < ApplicationRecord
   validate :classroom_consistency
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
+  validates :classroom_id, presence: true, if: -> { role == "aluno" }
+  validates :classroom_id, absence: true, if: -> { role == "professor" }
+
 
   enum role: { aluno: 1, professor: 2 }
 
